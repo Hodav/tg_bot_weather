@@ -1,10 +1,9 @@
-from pprint import pprint
-
 import requests
 from config import telegram_bor_token, open_weather_token
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
+from pprint import pprint
 
 bot = Bot(token=telegram_bor_token)
 dp = Dispatcher(bot)
@@ -32,7 +31,7 @@ async def start_command(message: types.Message) -> None:
 
 
 @dp.message_handler(content_types=['text'])
-async def weather_handler(message: types.Message):
+async def weather_handler(message: types.Message) -> None:
     """
     Обработчик сообщений пользователя
     """
@@ -44,7 +43,7 @@ async def weather_handler(message: types.Message):
         city_default = message.text
 
 
-def get_weather(city: str) -> str:
+async def get_weather(city: str) -> str:
     """
     функция отправления запроса на сервис OpenWeatherMap
     """
